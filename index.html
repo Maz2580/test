@@ -21,7 +21,8 @@
             }
         });
     </script>
-    <style>
+    <link rel="stylesheet" href="style.css" />
+    <!-- <style> CSS MOVED TO style.css
         :root {
             /* Enhanced Color Palette */
             --primary-color: #0079c1;
@@ -52,6 +53,10 @@
             --letter-spacing-tight: -0.025em;
             --letter-spacing-normal: 0;
             --letter-spacing-wide: 0.025em;
+
+            /* Geospatial Accents */
+            --geospatial-accent-color: #00bcd4; /* A vibrant cyan, good for tech/geo themes */
+            --geospatial-accent-hover: #0097a7;
             
             /* Enhanced Spacing */
             --spacing-xs: 0.25rem;   /* 4px */
@@ -83,7 +88,13 @@
             font-weight: var(--font-weight-normal);
             line-height: 1.6;
             letter-spacing: var(--letter-spacing-normal);
-            background: linear-gradient(135deg, var(--dark-bg) 0%, var(--darker-bg) 100%);
+            background-color: var(--darker-bg); /* Base color */
+            background-image:
+                linear-gradient(rgba(26, 26, 26, 0.95), rgba(15, 15, 15, 0.98)), /* Darkening gradient */
+                linear-gradient(45deg, var(--card-border) 25%, transparent 25%, transparent 75%, var(--card-border) 75%, var(--card-border)),
+                linear-gradient(45deg, var(--card-border) 25%, transparent 25%, transparent 75%, var(--card-border) 75%, var(--card-border));
+            background-size: 1px 1px, 30px 30px, 30px 30px; /* Control grid line thickness and spacing */
+            background-position: 0 0, 15px 15px, 0 0; /* Offset one of the grids to create finer lines */
             color: var(--text-color);
             overflow: hidden;
             -webkit-font-smoothing: antialiased;
@@ -276,16 +287,18 @@
         }
 
         .nav-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary-color);
+            background: rgba(0, 188, 212, 0.15); /* Accent hover */
+            border-color: var(--geospatial-accent-color);
+            color: var(--geospatial-accent-color);
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
 
         .nav-btn.active {
-            background: linear-gradient(135deg, var(--primary-color), var(--primary-hover));
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow-md), 0 0 0 2px rgba(0, 121, 193, 0.2);
+            background: linear-gradient(135deg, var(--geospatial-accent-color), var(--geospatial-accent-hover));
+            border-color: var(--geospatial-accent-color);
+            color: var(--text-color); /* Ensure text is readable on accent bg */
+            box-shadow: var(--shadow-md), 0 0 0 2px rgba(0, 188, 212, 0.25);
         }
 
         .nav-btn i {
@@ -339,8 +352,8 @@
 
         .advanced-search-input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 121, 193, 0.1);
+            border-color: var(--geospatial-accent-color);
+            box-shadow: 0 0 0 3px rgba(0, 188, 212, 0.2); /* Accent shadow */
             background: rgba(255, 255, 255, 0.05);
         }
 
@@ -410,8 +423,9 @@
         }
 
         .action-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary-color);
+            background: rgba(0, 188, 212, 0.15); /* Accent hover */
+            border-color: var(--geospatial-accent-color);
+            color: var(--geospatial-accent-color);
             transform: translateY(-1px);
             box-shadow: var(--shadow-md);
         }
@@ -544,15 +558,22 @@
             font-weight: var(--font-weight-semibold);
             color: var(--text-color);
             flex: 1;
+            border-bottom: 1px solid var(--geospatial-accent-color); /* Accent for category header */
+            padding-bottom: var(--spacing-sm);
+            margin-bottom: var(--spacing-md);
+        }
+        .category-header i { /* Style icon in category header */
+            color: var(--geospatial-accent-color);
+            margin-right: var(--spacing-sm);
         }
 
         .category-badge {
-            background: var(--primary-color);
-            color: white;
-            padding: 2px 8px;
+            background: var(--geospatial-accent-color); /* Use accent color for badge */
+            color: var(--darker-bg); /* Ensure contrast for text on accent bg */
+            padding: 3px 10px;
             border-radius: var(--radius-sm);
-            font-size: 10px;
-            font-weight: var(--font-weight-medium);
+            font-size: 11px;
+            font-weight: var(--font-weight-semibold);
         }
 
         /* Tools Grid */
@@ -583,9 +604,17 @@
         }
 
         .tool-card.active {
-            border-color: var(--primary-color);
-            background: rgba(0, 121, 193, 0.1);
+            border-color: var(--geospatial-accent-color);
+            background: rgba(0, 188, 212, 0.1); /* Accent color with low opacity */
+            box-shadow: 0 0 10px rgba(0, 188, 212, 0.3); /* Glow effect */
         }
+        .tool-card.active .tool-icon {
+            background: linear-gradient(135deg, var(--geospatial-accent-color), var(--geospatial-accent-hover));
+        }
+        .tool-card.active h5 {
+            color: var(--geospatial-accent-color);
+        }
+
 
         .tool-icon {
             width: 40px;
@@ -894,16 +923,18 @@
         }
 
         .control-btn:hover {
-            background: rgba(255, 255, 255, 0.1);
-            border-color: var(--primary-color);
+            background: rgba(0, 188, 212, 0.15); /* Accent hover */
+            border-color: var(--geospatial-accent-color);
+            color: var(--geospatial-accent-color);
             box-shadow: var(--shadow-md);
             transform: translateY(-1px);
         }
 
         .control-btn.active {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-            border-color: var(--primary-color);
-            box-shadow: var(--shadow-md), 0 0 0 2px rgba(0, 121, 193, 0.2);
+            background: linear-gradient(135deg, var(--geospatial-accent-color) 0%, var(--geospatial-accent-hover) 100%);
+            border-color: var(--geospatial-accent-color);
+            color: var(--text-color); /* Ensure text readable on accent */
+            box-shadow: var(--shadow-md), 0 0 0 2px rgba(0, 188, 212, 0.25);
         }
 
         .basemap-panel {
@@ -915,15 +946,41 @@
             padding: 10px;
             display: none;
             z-index: 1000;
+            display: grid; /* Use grid for better layout */
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr)); /* Responsive columns */
+            gap: var(--spacing-sm);
         }
 
         .basemap-option {
-            padding: 10px;
+            padding: var(--spacing-sm);
             color: var(--text-color);
             cursor: pointer;
             display: flex;
+            flex-direction: column; /* Stack image and text */
             align-items: center;
-            gap: 10px;
+            gap: var(--spacing-xs);
+            border-radius: var(--radius-md);
+            transition: background-color 0.2s ease;
+            text-align: center;
+        }
+
+        .basemap-thumbnail {
+            width: 100px; /* Adjust as needed */
+            height: 70px; /* Adjust as needed */
+            border-radius: var(--radius-sm);
+            border: 1px solid var(--card-border);
+            object-fit: cover;
+            background-color: var(--secondary-color); /* Fallback bg */
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 10px; /* For alt text if image fails */
+            color: var(--text-muted);
+        }
+
+        .basemap-option span {
+            font-size: 12px;
+            margin-top: var(--spacing-xs);
         }
 
         .basemap-option:hover {
@@ -931,8 +988,13 @@
         }
 
         .basemap-option.active {
-            background-color: var(--primary-color);
+            background-color: var(--geospatial-accent-color);
+            box-shadow: inset 0 0 10px rgba(0,0,0,0.2);
         }
+        .basemap-option.active .basemap-thumbnail {
+            border-color: var(--geospatial-accent-hover);
+        }
+
 
         .measurement-panel {
             position: absolute;
@@ -1003,8 +1065,12 @@
         }
 
         .layer-item.active {
-            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-hover) 100%);
-            border-left: 3px solid var(--primary-light);
+            background: rgba(0, 188, 212, 0.15); /* Accent color with low opacity */
+            border-left: 3px solid var(--geospatial-accent-color);
+            font-weight: var(--font-weight-medium);
+        }
+        .layer-item.active i { /* Optional: make icon color more vibrant when active */
+            color: var(--geospatial-accent-color) !important;
         }
 
         .layer-item input[type="checkbox"] {
@@ -1263,11 +1329,9 @@
 
         #query-input:focus {
             outline: none;
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 3px rgba(0, 121, 193, 0.1), var(--shadow-md);
+            border-color: var(--geospatial-accent-color);
+            box-shadow: 0 0 0 2px rgba(0, 188, 212, 0.25), var(--shadow-md); /* Accent shadow */
             background: rgba(255, 255, 255, 0.08);
-            border-color: var(--primary-color);
-            box-shadow: 0 0 0 2px rgba(0,121,193,0.2);
         }
 
         #query-input::placeholder {
@@ -1275,7 +1339,7 @@
         }
 
         .send-button {
-            background-color: var(--primary-color);
+            background-color: var(--geospatial-accent-color);
             color: var(--text-color);
             border: none;
             border-radius: 50%;
@@ -1290,7 +1354,7 @@
         }
 
         .send-button:hover {
-            background-color: #0069a3;
+            background-color: var(--geospatial-accent-hover);
             transform: scale(1.05);
         }
 
@@ -1465,6 +1529,20 @@
             background: rgba(255,255,255,0.3);
         }
 
+        .spatial-data-coords {
+            background-color: rgba(0, 188, 212, 0.1); /* Geospatial accent with low opacity */
+            padding: 2px 6px;
+            border-radius: var(--radius-sm);
+            font-family: 'Consolas', 'Monaco', monospace;
+            border: 1px solid rgba(0, 188, 212, 0.3);
+            display: inline-block;
+        }
+
+        .spatial-data-coords i {
+            margin-right: 5px;
+            color: var(--geospatial-accent-color);
+        }
+
         /* Templates Styles */
         .templates-container {
             margin: 20px 0;
@@ -1514,7 +1592,8 @@
         }
 
         .category-btn.active {
-            background: var(--primary-color);
+            background: var(--geospatial-accent-color);
+            color: var(--text-color); /* Ensure text is readable */
         }
 
         .templates-grid {
@@ -2039,7 +2118,7 @@
             align-items: center;
             gap: 5px;
         }
-    </style>
+    </style> -->
 </head>
 <body>
     <div id="container">
@@ -2158,7 +2237,7 @@
             <div class="nav-left">
                 <div class="app-brand">
                     <div class="brand-icon">
-                        <i class="fas fa-satellite-dish"></i>
+                        <i class="fas fa-globe-americas"></i>
                     </div>
                     <div class="brand-info">
                         <h1 class="brand-title">Spatial LLM</h1>
@@ -2431,31 +2510,31 @@
 
         <div class="basemap-panel">
             <div class="basemap-option active" data-basemap="osm">
-                <i class="fas fa-map"></i>
+                <img src="/static/basemap_thumbnails/osm.png" alt="OpenStreetMap Thumbnail" class="basemap-thumbnail">
                 <span>OpenStreetMap</span>
             </div>
             <div class="basemap-option" data-basemap="streets">
-                <i class="fas fa-road"></i>
+                <img src="/static/basemap_thumbnails/streets.png" alt="Streets Thumbnail" class="basemap-thumbnail">
                 <span>Streets</span>
             </div>
             <div class="basemap-option" data-basemap="terrain">
-                <i class="fas fa-mountain"></i>
+                <img src="/static/basemap_thumbnails/terrain.png" alt="Terrain Thumbnail" class="basemap-thumbnail">
                 <span>Terrain</span>
             </div>
             <div class="basemap-option" data-basemap="dark">
-                <i class="fas fa-moon"></i>
+                <img src="/static/basemap_thumbnails/dark.png" alt="Dark Map Thumbnail" class="basemap-thumbnail">
                 <span>Dark Map</span>
             </div>
             <div class="basemap-option" data-basemap="satellite">
-                <i class="fas fa-satellite"></i>
+                <img src="/static/basemap_thumbnails/satellite.png" alt="Satellite Thumbnail" class="basemap-thumbnail">
                 <span>Satellite</span>
             </div>
             <div class="basemap-option" data-basemap="hybrid">
-                <i class="fas fa-layer-group"></i>
+                <img src="/static/basemap_thumbnails/hybrid.png" alt="Hybrid Thumbnail" class="basemap-thumbnail">
                 <span>Hybrid</span>
             </div>
             <div class="basemap-option" data-basemap="topo">
-                <i class="fas fa-compass"></i>
+                <img src="/static/basemap_thumbnails/topo.png" alt="Topographic Thumbnail" class="basemap-thumbnail">
                 <span>Topographic</span>
             </div>
         </div>
@@ -2868,6 +2947,29 @@
             zoomControl: false
         }).setView([-37.7964, 144.9612], 15);
 
+        // Add Scale Bar
+        L.control.scale({ imperial: false, metric: true }).addTo(map);
+
+        // Mouse Coordinates Display
+        const coordinatesDiv = document.createElement('div');
+        coordinatesDiv.id = 'map-coordinates';
+        coordinatesDiv.style.position = 'absolute';
+        coordinatesDiv.style.bottom = '10px';
+        coordinatesDiv.style.right = '10px';
+        coordinatesDiv.style.backgroundColor = 'rgba(255, 255, 255, 0.7)';
+        coordinatesDiv.style.padding = '2px 5px';
+        coordinatesDiv.style.fontSize = '12px';
+        coordinatesDiv.style.zIndex = '1000';
+        coordinatesDiv.style.borderRadius = '3px';
+        document.getElementById('map').appendChild(coordinatesDiv);
+
+        map.on('mousemove', function(e) {
+            coordinatesDiv.innerHTML = `Lat: ${e.latlng.lat.toFixed(5)}, Lng: ${e.latlng.lng.toFixed(5)}`;
+        });
+        map.on('mouseout', function() {
+            coordinatesDiv.innerHTML = ''; // Clear when mouse leaves map
+        });
+
         // Define enhanced basemaps collection
         const basemaps = {
             osm: L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -3187,58 +3289,98 @@ const airportIcon = L.icon({
 
         // Function to get layer styling based on layer type
         function getLayerStyle(layerName, feature) {
-            const styles = {
-                public_educational: { color: '#4CAF50', weight: 2, fillOpacity: 0.7 },
-                public_health: { color: '#f44336', weight: 2, fillOpacity: 0.7 },
-                public_accomodation: { color: '#FF9800', weight: 2, fillOpacity: 0.7 },
-                public_housing: { color: '#9C27B0', weight: 2, fillOpacity: 0.7 },
-                public_road: { color: '#607D8B', weight: 3, opacity: 0.8 },
-                public_street: { color: '#795548', weight: 2, opacity: 0.6 },
-                public_agricultural_lands: { color: '#8BC34A', weight: 2, fillOpacity: 0.5 },
-                public_sewage_treatment_plants: { color: '#3F51B5', weight: 2, fillOpacity: 0.8 },
-                public_air_quality_station: { color: '#00BCD4', weight: 2, fillOpacity: 0.8 }
+            // Define base styles for different geometry types
+            const baseStyles = {
+                Point: { radius: 6, weight: 1, opacity: 1, fillOpacity: 0.8, color: '#FFFFFF' },
+                LineString: { weight: 3, opacity: 0.75 },
+                Polygon: { weight: 2, opacity: 1, fillOpacity: 0.5, color: '#FFFFFF' }
             };
+
+            let style = {};
+            const geometryType = feature && feature.geometry ? feature.geometry.type : 'Point'; // Default to point if unknown
             
-            return styles[layerName] || { color: '#0079c1', weight: 2, fillOpacity: 0.6 };
+            // Start with base style for the geometry type
+            if (geometryType.includes('Point')) style = {...baseStyles.Point};
+            else if (geometryType.includes('Line')) style = {...baseStyles.LineString};
+            else if (geometryType.includes('Polygon')) style = {...baseStyles.Polygon};
+
+            // Layer-specific styling overrides
+            switch (layerName) {
+                case 'public_educational':
+                    style.fillColor = '#28a745'; // Green
+                    style.color = style.fillColor; // For lines
+                    break;
+                case 'public_health':
+                    style.fillColor = '#dc3545'; // Red
+                    style.color = style.fillColor;
+                    break;
+                case 'public_accomodation':
+                    style.fillColor = '#ffc107'; // Yellow
+                    style.color = style.fillColor;
+                    break;
+                case 'public_housing':
+                    style.fillColor = '#6f42c1'; // Purple
+                    style.color = style.fillColor;
+                    break;
+                case 'public_road':
+                    style.color = '#6c757d'; // Gray
+                    style.weight = 4;
+                    break;
+                case 'public_street':
+                    style.color = '#adb5bd'; // Lighter Gray
+                    style.weight = 2.5;
+                    break;
+                case 'public_agricultural_lands':
+                    style.fillColor = '#17a2b8'; // Info Blue/Teal (using for contrast)
+                    style.color = style.fillColor;
+                    break;
+                case 'public_sewage_treatment_plants':
+                    style.fillColor = '#fd7e14'; // Orange
+                    style.color = style.fillColor;
+                    break;
+                case 'public_air_quality_station':
+                    style.fillColor = '#007bff'; // Primary Blue
+                    style.color = style.fillColor;
+                    break;
+                case 'public_airports':
+                    style.fillColor = '#6610f2'; // Indigo
+                    style.color = style.fillColor; // For potential line/polygon features if any
+                    break;
+                default:
+                    style.fillColor = style.fillColor || var(--geospatial-accent-color); // Default to accent if not set
+                    style.color = style.color || var(--geospatial-accent-color);
+            }
+            return style;
         }
 
         // Function to get layer marker based on layer type
         function getLayerMarker(layerName, feature, latlng) {
-            const icons = {
-                public_airports: L.divIcon({
-                    className: 'custom-marker airport-marker',
-                    html: '<i class="fas fa-plane" style="color: #2196F3;"></i>',
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
-                }),
-                public_health: L.divIcon({
-                    className: 'custom-marker health-marker',
-                    html: '<i class="fas fa-hospital" style="color: #f44336;"></i>',
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
-                }),
-                public_educational: L.divIcon({
-                    className: 'custom-marker educational-marker',
-                    html: '<i class="fas fa-school" style="color: #4CAF50;"></i>',
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
-                }),
-                public_air_quality_station: L.divIcon({
-                    className: 'custom-marker air-quality-marker',
-                    html: '<i class="fas fa-wind" style="color: #00BCD4;"></i>',
-                    iconSize: [20, 20],
-                    iconAnchor: [10, 10]
-                })
+            const style = getLayerStyle(layerName, feature); // Get base style including color
+
+            // Use Font Awesome icons for specific layers
+            const faIcons = {
+                public_educational: 'fa-school',
+                public_health: 'fa-hospital-alt', // Using 'hospital-alt' for a slightly different look
+                public_accomodation: 'fa-bed',
+                public_housing: 'fa-home',
+                public_air_quality_station: 'fa-wind',
+                public_sewage_treatment_plants: 'fa-industry', // Generic industry icon
+                public_airports: 'fa-plane-departure'
             };
+
+            if (faIcons[layerName]) {
+                return L.marker(latlng, {
+                    icon: L.divIcon({
+                        html: `<i class="fas ${faIcons[layerName]}" style="color: ${style.fillColor}; font-size: 18px; text-shadow: 0 0 3px #000;"></i>`,
+                        className: 'custom-fa-marker', // Add a class for potential global styling
+                        iconSize: [24, 24],
+                        iconAnchor: [12, 12]
+                    })
+                });
+            }
             
-            return icons[layerName] || L.circleMarker(latlng, {
-                radius: 6,
-                fillColor: getLayerStyle(layerName).color,
-                color: '#fff',
-                weight: 1,
-                opacity: 1,
-                fillOpacity: 0.8
-            });
+            // Default to circleMarker if no specific FA icon
+            return L.circleMarker(latlng, style);
         }
 
         // Function to create popup content for layers
@@ -4118,15 +4260,28 @@ const airportIcon = L.icon({
             // For bot messages, process the content to properly handle tables
             if (!isUser) {
                 // Check if content contains a table - improved detection logic
-                if (content.includes('|') && (
-                    content.includes('---') || 
-                    content.includes('School Name') || 
+                // Regex to find various coordinate patterns
+                // Supports: Lat: X, Lng: Y; Lat: X, Lon: Y; Latitude: X, Longitude: Y; X, Y (as numbers); (X, Y)
+                // It's made more general to catch more cases.
+                const coordRegex = /((?:Lat|Latitude):\s*(-?\d+\.\d+)\s*,\s*(?:Lng|Lon|Longitude):\s*(-?\d+\.\d+))|(\(\s*(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)\s*\))|((?:^|\s)(-?\d+\.\d+)\s*,\s*(-?\d+\.\d+)(?:\s|$))/gi;
+
+                if (!isUser) { // Only process bot messages for spatial data highlighting
+                    content = content.replace(coordRegex, (match) => {
+                        // Check if it's already wrapped (simple check, might need improvement)
+                        if (match.includes('spatial-data-coords')) return match;
+                        return `<span class="spatial-data-coords"><i class="fas fa-map-marker-alt"></i>${match.trim()}</span>`;
+                    });
+                }
+
+
+                if (!isUser && content.includes('|') && ( // Check for !isUser for table processing too
+                    content.includes('---') ||
+                    content.includes('School Name') ||
                     content.includes('Stage') ||
                     content.includes('Institution Name') ||
                     content.includes('Number of Students') ||
                     content.includes('Passenger Capacity') ||
                     content.includes('Total Passengers') ||
-                    // More generalized pattern for table detection
                     (content.includes('\n|') && content.includes('|\n'))
                 )) {
                     console.log('Table detected, applying special processing');
